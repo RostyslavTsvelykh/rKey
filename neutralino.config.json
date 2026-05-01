@@ -1,0 +1,29 @@
+{
+  "applicationId": "com.example.typing-learner",
+  "version": "1.0.0",
+  "defaultMode": "window",
+  "url": "/index.html",
+  "modes": {
+  "window": {
+    "title": "Typing Learner",
+    "width": 1920,
+    "height": 1080,
+    "fullScreen": false,
+    "maximized": true,
+    "resizable": true
+  }
+},
+  "cli": {
+    "binaryName": "typing-learner",
+    "resourcesPath": "/",
+    "extensionsPath": "/extensions",
+    "frontendLibrary": {
+      "devUrl": ""
+    }
+  },
+  "nativeAllowList": [
+    "filesystem.*",
+    "app.*",
+    "os.*"
+  ]
+}
