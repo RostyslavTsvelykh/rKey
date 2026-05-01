@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Learner</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/keyboard.css">
+  <link rel="stylesheet" href="css/lesson.css">
+  <link rel="stylesheet" href="css/stats.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- HOME SCREEN -->
+    <div id="home-screen" class="screen home-screen">
+      <h1 class="home-title">Typing Learner</h1>
+      <p class="home-subtitle">Master the keyboard. Type like a tech leader.</p>
+      <div class="home-actions">
+        <button id="btn-start" class="btn btn-primary btn-large">Start Learning</button>
+        <button id="btn-progress" class="btn btn-secondary btn-large">Progress</button>
+      </div>
+      <p class="home-tip mt-32">Place your fingers on <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>F</kbd> and <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd> <kbd>;</kbd></p>
+    </div>
+
+    <!-- LESSON SELECT SCREEN -->
+    <div id="lesson-screen" class="screen">
+      <div class="header">
+        <button id="btn-back-lessons" class="back-btn">&larr; Home</button>
+        <h1>Choose a Lesson</h1>
+        <div></div>
+      </div>
+      <div class="content">
+        <div id="lesson-list" class="lesson-grid"></div>
+      </div>
+    </div>
+
+    <!-- TYPING SCREEN -->
+    <div id="typing-screen" class="screen">
+      <div class="header">
+        <button id="btn-back-typing" class="back-btn">&larr; Quit</button>
+        <h1 id="typing-lesson-title">Lesson</h1>
+        <span class="subtitle">ESC to pause</span>
+      </div>
+      <div class="stats-bar">
+        <div class="stat-pill">
+          <span class="label">WPM</span>
+          <span id="wpm-value" class="value">0</span>
+        </div>
+        <div class="stat-pill">
+          <span class="label">Accuracy</span>
+          <span id="acc-value" class="value">100%</span>
+        </div>
+        <div class="stat-pill">
+          <span class="label">Errors</span>
+          <span id="err-value" class="value">0</span>
+        </div>
+        <div class="stat-pill">
+          <span class="label">Time</span>
+          <span id="time-value" class="value">0:00</span>
+        </div>
+      </div>
+      <div class="typing-area">
+        <div id="text-display" class="text-display"></div>
+      </div>
+      <div id="finger-hint" class="finger-hint"></div>
+      <div class="keyboard-hands-row">
+        <div id="hands-container"></div>
+        <div class="keyboard-container">
+          <div id="keyboard-container"></div>
+        </div>
+      </div>
+
+      <!-- Pause Overlay -->
+      <div id="pause-overlay" class="pause-overlay">
+        <div class="pause-content">
+          <h2>Paused</h2>
+          <p>Press Resume to continue or Quit to go back.</p>
+          <div style="display: flex; gap: 12px; justify-content: center;">
+            <button id="btn-resume" class="btn btn-primary">Resume</button>
+            <button id="btn-quit" class="btn btn-secondary">Quit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS SCREEN -->
+    <div id="results-screen" class="screen">
+      <div class="header">
+        <button id="btn-back-results" class="back-btn">&larr; Lessons</button>
+        <h1>Results</h1>
+        <div></div>
+      </div>
+      <div class="content" style="display: flex; align-items: center; justify-content: center;">
+        <div class="results-container">
+          <h2>Exercise Complete!</h2>
+          <p class="results-subtitle">Here's how you did</p>
+          <div class="results-grid">
+            <div class="result-card">
+              <div id="result-wpm" class="result-value">0</div>
+              <div class="result-label">Words/Min</div>
+              <div id="result-wpm-best" class="result-best"></div>
+            </div>
+            <div class="result-card">
+              <div id="result-accuracy" class="result-value">0%</div>
+              <div class="result-label">Accuracy</div>
+              <div id="result-acc-best" class="result-best"></div>
+            </div>
+            <div class="result-card">
+              <div id="result-errors" class="result-value">0</div>
+              <div class="result-label">Errors</div>
+              <div class="result-best"></div>
+            </div>
+            <div class="result-card">
+              <div id="result-time" class="result-value">0:00</div>
+              <div class="result-label">Time</div>
+              <div class="result-best"></div>
+            </div>
+          </div>
+          <div class="results-actions">
+            <button id="btn-retry" class="btn btn-secondary">Retry</button>
+            <button id="btn-next-lesson" class="btn btn-primary">Next Exercise</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRESS SCREEN -->
+    <div id="progress-screen" class="screen">
+      <div class="header">
+        <button id="btn-back-progress" class="back-btn">&larr; Home</button>
+        <h1>Your Progress</h1>
+        <div></div>
+      </div>
+      <div class="content">
+        <div class="progress-container">
+          <div class="progress-overview">
+            <div class="progress-stat">
+              <div id="progress-completed" class="stat-value">0</div>
+              <div class="stat-label">Lessons Done</div>
+            </div>
+            <div class="progress-stat">
+              <div id="progress-best-wpm" class="stat-value">-</div>
+              <div class="stat-label">Best WPM</div>
+            </div>
+            <div class="progress-stat">
+              <div id="progress-time" class="stat-value">0m</div>
+              <div class="stat-label">Total Time</div>
+            </div>
+          </div>
+          <div class="history-section">
+            <h3>WPM Over Time</h3>
+            <div id="wpm-chart" class="history-chart"></div>
+          </div>
+          <div class="history-section">
+            <h3>Recent Sessions</h3>
+            <div id="history-list" class="history-list"></div>
+          </div>
+          <div class="text-center">
+            <button id="btn-reset" class="reset-btn">Reset All Progress</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+.typing-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 32px;
+  min-height: 0;
+}
+
+.text-display {
+  font-family: 'Fira Code', monospace;
+  font-size: 22px;
+  line-height: 2.2;
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  word-wrap: break-word;
+  padding: 28px 32px;
+  background: linear-gradient(180deg, var(--bg-card), var(--bg-surface));
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.text-display .char {
+  position: relative;
+  letter-spacing: 1.5px;
+  transition: color 0.1s;
+}
+
+.text-display .char.upcoming {
+  color: var(--text-dim);
+}
+
+.text-display .char.current {
+  color: #fff;
+  background: rgba(59, 130, 246, 0.15);
+  border-radius: 4px;
+  padding: 2px 1px;
+}
+
+.text-display .char.current::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  animation: cursorPulse 1.2s ease infinite;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+}
+
+.text-display .char.correct {
+  color: var(--correct);
+}
+
+.text-display .char.incorrect {
+  color: var(--error);
+  text-decoration: underline;
+  text-decoration-color: var(--error);
+  text-underline-offset: 4px;
+}
+
+.text-display .char.space-char {
+  min-width: 11px;
+  display: inline-block;
+}
+
+@keyframes cursorPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(59, 130, 246, 0.5); }
+  50% { opacity: 0.3; box-shadow: 0 0 4px rgba(59, 130, 246, 0.2); }
+}
+
+/* Finger hint */
+.finger-hint {
+  text-align: center;
+  padding: 6px;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  min-height: 30px;
+}
+
+.finger-hint .finger-name {
+  font-weight: 600;
+  text-transform: capitalize;
+  font-family: 'Sora', sans-serif;
+}
+
+/* Pause overlay */
+.pause-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 14, 26, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+
+.pause-overlay.active {
+  display: flex;
+}
+
+.pause-content {
+  text-align: center;
+  animation: scaleIn 0.2s ease;
+}
+
+.pause-content h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.pause-content p {
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  font-size: 15px;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
